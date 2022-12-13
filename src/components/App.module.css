@@ -1,0 +1,10 @@
+.box {
+  padding: 20px;
+  max-width: 500px;
+}
+.title {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 28px;
+  font-weight: 900;
+}
