@@ -7,11 +7,7 @@ export function Contact({ id, name, number, deleteContact }) {
         <span className={s.name}>{name}:</span>
         <span className={s.number}>{number}</span>
       </p>
-      <button
-        className={s.btn}
-        type="button"
-        onClick={() => deleteContact(id, name)}
-      >
+      <button className={s.btn} type="button" onClick={() => deleteContact(id)}>
         Delete
       </button>
     </li>
