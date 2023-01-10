@@ -3,9 +3,11 @@ import ContactForm from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import s from './App.module.css';
-import { nanoid } from 'nanoid';
+import { useSelector } from 'react-redux';
+import { getContacts } from 'redux/contacts/contacts-selectors';
 
 export default function App() {
+  const contactss = useSelector(getContacts);
   const initialContacts = [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -23,19 +25,20 @@ export default function App() {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const addContact = (name, number) => {
-    const findContact = contacts.find(contact => contact.name === name);
-    if (findContact) {
-      alert(`${name} is already in contacts`);
-      return;
-    }
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-    setContacts(prevContacts => [...prevContacts, newContact]);
-  };
+  // const addContact = (name, number) => {
+  //   const findContact = contacts.find(contact => contact.name === name);
+  //   if (findContact) {
+  //     alert(`${name} is already in contacts`);
+  //     return;
+  //   }
+  //   const newContact = {
+  //     id: nanoid(),
+  //     name,
+  //     number,
+  //   };
+  //   setContacts(prevContacts => [...prevContacts, newContact]);
+  // };
+
   const changeFilter = ({ target }) => {
     setFilter(target.value);
   };
@@ -50,10 +53,10 @@ export default function App() {
   return (
     <div className={s.box}>
       <h1 className={s.title}>Phonebook</h1>
-      <ContactForm addContact={addContact} />
+      <ContactForm />
       <h1 className={s.title}>Contacts</h1>
       <Filter value={filter} onChange={changeFilter} />
-      <ContactList contacts={filterContacts()} deleteContact={deleteContact} />
+      <ContactList contacts={contactss} deleteContact={deleteContact} />
     </div>
   );
 }
