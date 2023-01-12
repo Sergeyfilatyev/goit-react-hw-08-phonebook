@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 const initialState = {
   contacts: [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -12,6 +13,13 @@ const contactsSlice = createSlice({
   initialState,
   reducers: {
     addContact: (state, { payload }) => {
+      const findContact = state.contacts.find(
+        contact => contact.name === payload.name
+      );
+      if (findContact) {
+        toast.warning(`${payload.name} is already in contacts`);
+        return;
+      }
       state.contacts.push(payload);
     },
     deleteContact: (state, { payload }) => {
@@ -19,3 +27,5 @@ const contactsSlice = createSlice({
     },
   },
 });
+export const { addContact, deleteContact } = contactsSlice.actions;
+export default contactsSlice.reducer;
