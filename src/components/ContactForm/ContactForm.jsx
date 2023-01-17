@@ -1,18 +1,15 @@
 import { useState } from 'react';
 import { addContact } from 'redux/contacts/contacts-operations';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getContacts,
-  selectIsLoading,
-} from 'redux/contacts/contacts-selectors';
+import { selectContacts } from 'redux/contacts/contacts-selectors';
 import { toast } from 'react-toastify';
 import s from './ContactForm.module.css';
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
-  const isLoading = useSelector(selectIsLoading);
+  const contacts = useSelector(selectContacts);
+
   const handleSubmit = event => {
     event.preventDefault();
     const newContact = {
