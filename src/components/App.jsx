@@ -1,16 +1,23 @@
 import ContactForm from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/contacts/contacts-operations';
+import { useDispatch, useSelector } from 'react-redux';
 import { Filter } from './Filter/Filter';
 import s from './App.module.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
+import { selectIsLoading } from 'redux/contacts/contacts-selectors';
+
 export default function App() {
-  axios.defaults.baseURL = 'https://63c40c4aa9085635753089ee.mockapi.io/';
-  const fetchContacts = () => axios('contacts').then(r => console.log(r.data));
-  fetchContacts();
+  const isLoading = useSelector(selectIsLoading);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, []);
   return (
     <div className={s.box}>
+      {isLoading && <h1>Loading...</h1>}
       <h1 className={s.title}>Phonebook</h1>
       <ContactForm />
       <h1 className={s.title}>Contacts</h1>

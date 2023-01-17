@@ -14,8 +14,8 @@ export function ContactList() {
   const visibleContacts = filterContacts();
   return (
     <ul className={s.list}>
-      {visibleContacts.map(({ id, name, number }) => (
-        <Contact key={id} id={id} name={name} number={number} />
+      {visibleContacts.map(({ id, name, phone }) => (
+        <Contact key={id} id={id} name={name} phone={phone} />
       ))}
     </ul>
   );
