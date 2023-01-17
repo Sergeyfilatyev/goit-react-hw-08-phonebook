@@ -1,11 +1,10 @@
 import s from './Contact.module.css';
 import { deleteContact } from 'redux/contacts/contacts-operations';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoading } from 'redux/contacts/contacts-selectors';
+import { useDispatch } from 'react-redux';
 
 export function Contact({ id, name, phone }) {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
+
   return (
     <li className={s.item}>
       <p>

@@ -19,7 +19,7 @@ export default function App() {
   const error = useSelector(selectError);
   useEffect(() => {
     dispatch(fetchContacts());
-  }, []);
+  }, [dispatch]);
   return (
     <div className={s.box}>
       <h1 className={s.title}>Phonebook</h1>
