@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import s from './ContactForm.module.css';
 export default function ContactForm() {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
@@ -14,7 +14,7 @@ export default function ContactForm() {
     event.preventDefault();
     const newContact = {
       name,
-      phone,
+      number,
     };
     const findContact = contacts.find(
       contact => contact.name === newContact.name
@@ -31,8 +31,8 @@ export default function ContactForm() {
       case 'name':
         setName(value);
         break;
-      case 'phone':
-        setPhone(value);
+      case 'number':
+        setNumber(value);
         break;
       default:
         return;
@@ -40,7 +40,7 @@ export default function ContactForm() {
   };
   const reset = () => {
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   return (
@@ -63,9 +63,9 @@ export default function ContactForm() {
         <input
           className={s.input}
           type="tel"
-          value={phone}
+          value={number}
           onChange={handleChange}
-          name="phone"
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

@@ -12,6 +12,8 @@ import { CirclesWithBar } from 'react-loader-spinner';
 import s from './App.module.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { RegisterForm } from './RegisterForm/RegisterForm';
+import { LoginForm } from './LoginForm/LoginForm';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -40,6 +42,8 @@ export default function App() {
         />
       )}
       {error && <p className={s.error}>{error.message}</p>}
+      <RegisterForm />
+      <LoginForm />
     </div>
   );
 }
