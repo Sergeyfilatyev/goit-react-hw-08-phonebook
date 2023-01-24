@@ -14,11 +14,14 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RegisterForm } from './RegisterForm/RegisterForm';
 import { LoginForm } from './LoginForm/LoginForm';
+import { selectToken } from 'redux/auth/auth-selectors';
 
 export default function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
+  const token = useSelector(selectToken);
+
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);

@@ -13,10 +13,10 @@ export const register = createAsyncThunk(
   'auth/register',
   async (user, { rejectWithValue }) => {
     try {
-      const response = await axios.post('users/signup', user);
-      console.log(response);
-      token.set(response.data.token);
-      return response.data;
+      const { data } = await axios.post('users/signup', user);
+      console.log(data);
+      token.set(data.token);
+      return data;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -26,10 +26,10 @@ export const login = createAsyncThunk(
   'auth/login',
   async (user, { rejectWithValue }) => {
     try {
-      const response = await axios.post('users/login', user);
-      console.log(response);
-      token.set(response.data.token);
-      return response.data;
+      const { data } = await axios.post('users/login', user);
+      console.log(data);
+      token.set(data.token);
+      return data;
     } catch (error) {
       return rejectWithValue(error);
     }
