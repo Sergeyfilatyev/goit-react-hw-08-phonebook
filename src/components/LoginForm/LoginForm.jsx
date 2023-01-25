@@ -20,6 +20,8 @@ export const LoginForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(login({ email, password }));
+    setEmail('');
+    setPassword('');
   };
   return (
     <form onSubmit={handleSubmit}>

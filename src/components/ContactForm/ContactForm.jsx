@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/contacts/contacts-selectors';
 import { toast } from 'react-toastify';
 import s from './ContactForm.module.css';
-export default function ContactForm() {
+export function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
