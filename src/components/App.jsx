@@ -7,18 +7,27 @@ import {
 import { CirclesWithBar } from 'react-loader-spinner';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { selectToken } from 'redux/auth/auth-selectors';
+import {
+  selectIsFetchCurrentUser,
+  selectToken,
+} from 'redux/auth/auth-selectors';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
 import { HomePage } from 'pages/HomePage';
 import { LoginPage } from 'pages/LoginPage';
 import { RegisterPage } from 'pages/RegisterPage';
 import { ContactsPage } from 'pages/ContactsPage';
+import { fetchCurrentUser } from 'redux/auth/auth-operations';
+import { PrivateRoute } from 'HOCs/PrivateRoute';
 export default function App() {
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-  const token = useSelector(selectToken);
-
+  // const isLoading = useSelector(selectIsLoading);
+  // const error = useSelector(selectError);
+  // const token = useSelector(selectToken);
+  const dispatch = useDispatch();
+  const isFetchCurrentUser = useSelector(selectIsFetchCurrentUser);
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
   return (
     // <div className={s.box}>
     //   <h1 className={s.title}>Phonebook</h1>
@@ -43,14 +52,24 @@ export default function App() {
     //   <LoginForm />
     // </div>
     <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="contacts" element={<ContactsPage />} />
-        </Route>
-      </Routes>
+      {!isFetchCurrentUser && (
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+
+            <Route
+              path="contacts"
+              element={
+                <PrivateRoute>
+                  <ContactsPage />
+                </PrivateRoute>
+              }
+            />
+          </Route>
+        </Routes>
+      )}
       <ToastContainer position="top-center" autoClose={3000} />
     </>
   );
