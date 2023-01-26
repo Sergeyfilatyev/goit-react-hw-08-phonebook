@@ -31,12 +31,21 @@ export const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Name:
-        <input type="text" name="name" value={name} onChange={handleChange} />
+        Name*:
+        <input
+          required
+          placeholder="Input name"
+          type="text"
+          name="name"
+          value={name}
+          onChange={handleChange}
+        />
       </label>
       <label>
-        Email:
+        Email*:
         <input
+          placeholder="Input email"
+          required
           type="email"
           name="email"
           value={email}
@@ -44,8 +53,11 @@ export const RegisterForm = () => {
         />
       </label>
       <label>
-        Password:
+        Password*:
         <input
+          required
+          placeholder="Input password min 7 characters"
+          minLength={7}
           type="password"
           name="password"
           value={password}

@@ -12,13 +12,14 @@ import {
   selectToken,
 } from 'redux/auth/auth-selectors';
 import { Route, Routes } from 'react-router-dom';
-import { Layout } from './Layout/Layout';
+import { Layout } from './Layout';
 import { HomePage } from 'pages/HomePage';
 import { LoginPage } from 'pages/LoginPage';
 import { RegisterPage } from 'pages/RegisterPage';
 import { ContactsPage } from 'pages/ContactsPage';
 import { fetchCurrentUser } from 'redux/auth/auth-operations';
 import { PrivateRoute } from 'HOCs/PrivateRoute';
+import { PublicRoute } from 'HOCs/PublicRoute';
 export default function App() {
   // const isLoading = useSelector(selectIsLoading);
   // const error = useSelector(selectError);
@@ -55,9 +56,30 @@ export default function App() {
       {!isFetchCurrentUser && (
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<RegisterPage />} />
+            <Route
+              index
+              element={
+                <PublicRoute>
+                  <HomePage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <PublicRoute restricted>
+                  <LoginPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <PublicRoute restricted>
+                  <RegisterPage />
+                </PublicRoute>
+              }
+            />
 
             <Route
               path="contacts"

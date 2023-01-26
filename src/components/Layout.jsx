@@ -1,6 +1,6 @@
-import { AuthNavigation } from 'components/AuthNavigation/AuthNavigation';
-import { AuthUserMenu } from 'components/AuthUserMenu/AuthUserMenu';
-import { Navigation } from 'components/Navigation/Navigation';
+import { AuthNavigation } from 'components/AuthNavigation';
+import { AuthUserMenu } from 'components/AuthUserMenu';
+import { Navigation } from 'components/Navigation';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { selectToken } from 'redux/auth/auth-selectors';

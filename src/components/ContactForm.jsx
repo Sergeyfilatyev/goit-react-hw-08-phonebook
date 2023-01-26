@@ -3,7 +3,6 @@ import { addContact } from 'redux/contacts/contacts-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/contacts/contacts-selectors';
 import { toast } from 'react-toastify';
-import s from './ContactForm.module.css';
 export function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -44,11 +43,10 @@ export function ContactForm() {
   };
 
   return (
-    <form className={s.form} onSubmit={handleSubmit}>
-      <label className={s.label}>
+    <form onSubmit={handleSubmit}>
+      <label>
         Name
         <input
-          className={s.input}
           type="text"
           value={name}
           onChange={handleChange}
@@ -58,10 +56,9 @@ export function ContactForm() {
           required
         />
       </label>
-      <label className={s.label}>
+      <label>
         Number
         <input
-          className={s.input}
           type="tel"
           value={number}
           onChange={handleChange}
@@ -71,9 +68,7 @@ export function ContactForm() {
           required
         />
       </label>
-      <button className={s.btn} type="submit">
-        Add contact
-      </button>
+      <button type="submit">Add contact</button>
     </form>
   );
 }
