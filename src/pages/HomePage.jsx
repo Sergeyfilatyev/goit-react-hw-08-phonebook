@@ -1,8 +1,10 @@
+import { Heading, Text } from '@chakra-ui/react';
+
 export const HomePage = () => {
   return (
     <>
-      <h1>Welcome, this is the Phonebook.</h1>
-      <p>You can save your contacts here.</p>
+      <Heading>Welcome, this is the Phonebook.</Heading>
+      <Text>You can save your contacts here.</Text>
     </>
   );
 };

@@ -1,16 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectError,
-  selectIsLoading,
-} from 'redux/contacts/contacts-selectors';
-import { CirclesWithBar } from 'react-loader-spinner';
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {
-  selectIsFetchCurrentUser,
-  selectToken,
-} from 'redux/auth/auth-selectors';
+import { selectIsFetchCurrentUser } from 'redux/auth/auth-selectors';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
 import { HomePage } from 'pages/HomePage';
@@ -20,78 +13,56 @@ import { ContactsPage } from 'pages/ContactsPage';
 import { fetchCurrentUser } from 'redux/auth/auth-operations';
 import { PrivateRoute } from 'HOCs/PrivateRoute';
 import { PublicRoute } from 'HOCs/PublicRoute';
+import { ChakraProvider, theme } from '@chakra-ui/react';
 export default function App() {
-  // const isLoading = useSelector(selectIsLoading);
-  // const error = useSelector(selectError);
-  // const token = useSelector(selectToken);
   const dispatch = useDispatch();
   const isFetchCurrentUser = useSelector(selectIsFetchCurrentUser);
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
   return (
-    // <div className={s.box}>
-    //   <h1 className={s.title}>Phonebook</h1>
-    //   <ContactForm />
-    //   <h1 className={s.title}>Contacts</h1>
-    //   <Filter />
-    //   <ContactList />
-    //   <ToastContainer position="top-center" autoClose={3000} />
-    //   {isLoading && (
-    //     <CirclesWithBar
-    //       height="100"
-    //       width="100"
-    //       color="#46a845"
-    //       wrapperClass={s.loader}
-    //       visible={true}
-    //       outerCircleColor="#206d2a"
-    //       ariaLabel="circles-with-bar-loading"
-    //     />
-    //   )}
-    //   {error && <p className={s.error}>{error.message}</p>}
-    //   <RegisterForm />
-    //   <LoginForm />
-    // </div>
     <>
-      {!isFetchCurrentUser && (
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route
-              index
-              element={
-                <PublicRoute>
-                  <HomePage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="login"
-              element={
-                <PublicRoute restricted>
-                  <LoginPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="register"
-              element={
-                <PublicRoute restricted>
-                  <RegisterPage />
-                </PublicRoute>
-              }
-            />
+      <ChakraProvider theme={theme}>
+        {!isFetchCurrentUser && (
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route
+                index
+                element={
+                  <PublicRoute>
+                    <HomePage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="login"
+                element={
+                  <PublicRoute restricted>
+                    <LoginPage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="register"
+                element={
+                  <PublicRoute restricted>
+                    <RegisterPage />
+                  </PublicRoute>
+                }
+              />
 
-            <Route
-              path="contacts"
-              element={
-                <PrivateRoute>
-                  <ContactsPage />
-                </PrivateRoute>
-              }
-            />
-          </Route>
-        </Routes>
-      )}
+              <Route
+                path="contacts"
+                element={
+                  <PrivateRoute>
+                    <ContactsPage />
+                  </PrivateRoute>
+                }
+              />
+            </Route>
+          </Routes>
+        )}
+      </ChakraProvider>
       <ToastContainer position="top-center" autoClose={3000} />
     </>
   );
