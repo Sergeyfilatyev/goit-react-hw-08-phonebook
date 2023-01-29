@@ -5,6 +5,7 @@ import { getFilter } from 'redux/filter/filter-selectors';
 import { useDispatch } from 'react-redux';
 import { fetchContacts } from 'redux/contacts/contacts-operations';
 import { useEffect } from 'react';
+import { Flex, Grid, Heading, SimpleGrid } from '@chakra-ui/react';
 export function ContactList() {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(getFilter);
@@ -19,10 +20,17 @@ export function ContactList() {
   };
   const visibleContacts = filterContacts();
   return (
-    <ul>
+    <SimpleGrid
+      p="10px"
+      w="100%"
+      maxW="1200px"
+      spacing="10px"
+      columns={[1, null, 2, 3, null]}
+      justifyContent="center"
+    >
       {visibleContacts.map(({ id, name, number }) => (
         <Contact key={id} id={id} name={name} number={number} />
       ))}
-    </ul>
+    </SimpleGrid>
   );
 }

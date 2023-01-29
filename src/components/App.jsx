@@ -13,7 +13,7 @@ import { ContactsPage } from 'pages/ContactsPage';
 import { fetchCurrentUser } from 'redux/auth/auth-operations';
 import { PrivateRoute } from 'HOCs/PrivateRoute';
 import { PublicRoute } from 'HOCs/PublicRoute';
-import { ChakraProvider, theme } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 export default function App() {
   const dispatch = useDispatch();
   const isFetchCurrentUser = useSelector(selectIsFetchCurrentUser);
@@ -22,7 +22,7 @@ export default function App() {
   }, [dispatch]);
   return (
     <>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider>
         {!isFetchCurrentUser && (
           <Routes>
             <Route path="/" element={<Layout />}>

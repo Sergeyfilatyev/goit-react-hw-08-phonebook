@@ -3,6 +3,16 @@ import { addContact } from 'redux/contacts/contacts-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/contacts/contacts-selectors';
 import { toast } from 'react-toastify';
+import {
+  FormControl,
+  FormLabel,
+  InputGroup,
+  InputLeftElement,
+  Input,
+  Button,
+} from '@chakra-ui/react';
+import { RxAvatar } from 'react-icons/rx';
+import { BsTelephoneFill } from 'react-icons/bs';
 export function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -43,32 +53,49 @@ export function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <FormControl
+      width={['300px', '400px', '500px', '600px', '600px']}
+      isRequired
+      as="form"
+      display="flex"
+      flexDirection="column"
+      gap="10px"
+      onSubmit={handleSubmit}
+    >
+      <FormLabel m="0" color="#ffffff">
         Name
-        <input
+      </FormLabel>
+      <InputGroup>
+        <InputLeftElement children={<RxAvatar />}></InputLeftElement>
+        <Input
+          bg="gray.100"
+          placeholder="Input name contact"
           type="text"
+          name="name"
           value={name}
           onChange={handleChange}
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
         />
-      </label>
-      <label>
+      </InputGroup>
+      <FormLabel m="0" color="#ffffff">
         Number
-        <input
+      </FormLabel>
+      <InputGroup>
+        <InputLeftElement children={<BsTelephoneFill />}></InputLeftElement>{' '}
+        <Input
+          bg="gray.100"
+          placeholder="Input pnone number"
           type="tel"
           value={number}
           onChange={handleChange}
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
         />
-      </label>
-      <button type="submit">Add contact</button>
-    </form>
+      </InputGroup>
+
+      <Button bg="gray.100" marginTop="12px" type="submit">
+        Add contact
+      </Button>
+    </FormControl>
   );
 }

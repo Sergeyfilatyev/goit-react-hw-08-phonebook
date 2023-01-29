@@ -8,7 +8,7 @@ export const AuthUserMenu = () => {
   const name = useSelector(selectName);
   return (
     <>
-      <Text>{`Welcome, ${name}!`}</Text>
+      <Text color="#ffffff">{`Welcome, ${name}!`}</Text>
       <Button onClick={() => dispatch(logout())}>Logout</Button>
     </>
   );

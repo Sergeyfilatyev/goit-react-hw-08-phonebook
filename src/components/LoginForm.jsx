@@ -1,7 +1,23 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from 'redux/auth/auth-operations';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  IconButton,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+} from '@chakra-ui/react';
+import { BiShow, BiHide } from 'react-icons/bi';
+import { FiMail } from 'react-icons/fi';
+import { RiLockPasswordFill } from 'react-icons/ri';
+
 export const LoginForm = () => {
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -24,26 +40,56 @@ export const LoginForm = () => {
     setPassword('');
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email:
-        <input
+    <FormControl
+      isRequired
+      as="form"
+      display="flex"
+      flexDirection="column"
+      gap="10px"
+      onSubmit={handleSubmit}
+    >
+      <FormLabel m="0" color="#ffffff">
+        Email{' '}
+      </FormLabel>
+      <InputGroup>
+        <InputLeftElement children={<FiMail />}></InputLeftElement>
+        <Input
+          bg="gray.100"
+          placeholder="Your email"
           type="email"
           name="email"
           value={email}
           onChange={handleChange}
         />
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
+      </InputGroup>
+      <FormLabel m="0" color="#ffffff">
+        Password
+      </FormLabel>
+      <InputGroup>
+        <InputLeftElement children={<RiLockPasswordFill />}></InputLeftElement>
+        <Input
+          bg="gray.100"
+          placeholder="Password min 7 characters"
+          minLength={7}
+          type={show ? 'text' : 'password'}
           name="password"
           value={password}
           onChange={handleChange}
         />
-      </label>
-      <button>Login</button>
-    </form>
+        <InputRightElement>
+          <IconButton
+            aria-label="Search database"
+            icon={show ? <BiHide /> : <BiShow />}
+            onClick={handleClick}
+          >
+            {show ? 'Hide' : 'Show'}
+          </IconButton>
+        </InputRightElement>
+      </InputGroup>
+
+      <Button bg="gray.100" marginTop="12px" type="submit">
+        Login
+      </Button>
+    </FormControl>
   );
 };

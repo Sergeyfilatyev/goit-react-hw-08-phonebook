@@ -11,7 +11,6 @@ export const Layout = () => {
     <Box
       bg="#98b33a"
       width="100%"
-      color="#ffffff"
       display="flex"
       flexDirection="column"
       justifyContent="space-between"
