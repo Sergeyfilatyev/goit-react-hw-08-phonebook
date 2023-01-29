@@ -9,7 +9,7 @@ export function Filter() {
         My phone contacts
       </Heading>
       <FormControl display="flex" flexDirection="column" alignItems="center">
-        <FormLabel color="#f1d7b5">FILTER CONTACTS</FormLabel>
+        <FormLabel color="#cf8632">FILTER CONTACTS</FormLabel>
         <Input
           bg="gray.100"
           placeholder="Search contact by name"

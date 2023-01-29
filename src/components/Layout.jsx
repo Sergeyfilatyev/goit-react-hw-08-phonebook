@@ -9,17 +9,21 @@ export const Layout = () => {
   const token = useSelector(selectToken);
   return (
     <Box
-      bg="#98b33a"
+      bg="radial-gradient(circle, rgba(57,97,48,0.6951155462184874) 3%, rgba(0,36,14,1) 25%, rgba(65,98,78,1) 90%);"
       width="100%"
       display="flex"
       flexDirection="column"
       justifyContent="space-between"
       alignItems="center"
-      h="100vh"
+      minH="100vh"
+      maxH="100%"
     >
       <Flex
         as="header"
+        p="10px"
+        gap="10px"
         justifyContent="space-between"
+        flexDirection={['column', 'row', null, null, null]}
         alignItems="center"
         w={['300px', '440px', '750px', '970px', '1200px']}
       >
@@ -27,9 +31,9 @@ export const Layout = () => {
         {token ? <AuthUserMenu /> : <AuthNavigation />}
       </Flex>
       <main>
-        <Box p="10px">
+        <Flex flexDirection="column" alignItems="center" p="10px">
           <Outlet />
-        </Box>
+        </Flex>
       </main>
       <footer>
         <Flex
@@ -37,9 +41,17 @@ export const Layout = () => {
           w={['300px', '440px', '750px', '970px', '1200px']}
           gap="5px"
           justifyContent="center"
+          alignItems="center"
         >
-          <Text>@Phonebook created by</Text>
-          <Link href="https://github.com/Sergeyfilatyev" isExternal>
+          <Text fontSize={['xs', 'x', null, null, null]} color="#ffffff">
+            @Phonebook created by
+          </Text>
+          <Link
+            color="#cf8632"
+            _hover={{ textDecoration: 'none', color: '#d6a976' }}
+            href="https://github.com/Sergeyfilatyev"
+            isExternal
+          >
             SergeyFilatyev
           </Link>
         </Flex>

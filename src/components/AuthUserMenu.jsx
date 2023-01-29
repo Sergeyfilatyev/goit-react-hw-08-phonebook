@@ -1,4 +1,5 @@
-import { Button, Text } from '@chakra-ui/react';
+import { IconButton, Text } from '@chakra-ui/react';
+import { BiLogOut } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'redux/auth/auth-operations';
 import { selectName } from 'redux/auth/auth-selectors';
@@ -9,7 +10,14 @@ export const AuthUserMenu = () => {
   return (
     <>
       <Text color="#ffffff">{`Welcome, ${name}!`}</Text>
-      <Button onClick={() => dispatch(logout())}>Logout</Button>
+      <IconButton
+        aria-label="logout"
+        icon={<BiLogOut size="30px" />}
+        variant="outline"
+        border="none"
+        _hover={{ color: '#cf8632' }}
+        onClick={() => dispatch(logout())}
+      ></IconButton>
     </>
   );
 };

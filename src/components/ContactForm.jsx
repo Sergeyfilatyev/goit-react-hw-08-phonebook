@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { addContact } from 'redux/contacts/contacts-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/contacts/contacts-selectors';
-import { toast } from 'react-toastify';
+import { useToast } from '@chakra-ui/react';
+
 import {
   FormControl,
   FormLabel,
@@ -14,6 +15,7 @@ import {
 import { RxAvatar } from 'react-icons/rx';
 import { BsTelephoneFill } from 'react-icons/bs';
 export function ContactForm() {
+  const toast = useToast();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
@@ -29,7 +31,12 @@ export function ContactForm() {
       contact => contact.name === newContact.name
     );
     if (findContact) {
-      toast.warning(`${newContact.name} is already in contacts`);
+      toast({
+        position: 'top',
+        title: `${newContact.name} is already in contacts`,
+        status: 'warning',
+        isClosable: true,
+      });
       return;
     }
     dispatch(addContact(newContact));
@@ -54,7 +61,9 @@ export function ContactForm() {
 
   return (
     <FormControl
-      width={['300px', '400px', '500px', '600px', '600px']}
+      px="7px"
+      py="20px"
+      width={['300px', '400px', '500px', null, null]}
       isRequired
       as="form"
       display="flex"
@@ -93,7 +102,12 @@ export function ContactForm() {
         />
       </InputGroup>
 
-      <Button bg="gray.100" marginTop="12px" type="submit">
+      <Button
+        _hover={{ color: '#cf8632' }}
+        bg="gray.100"
+        marginTop="12px"
+        type="submit"
+      >
         Add contact
       </Button>
     </FormControl>

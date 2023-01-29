@@ -87,7 +87,12 @@ export const LoginForm = () => {
         </InputRightElement>
       </InputGroup>
 
-      <Button bg="gray.100" marginTop="12px" type="submit">
+      <Button
+        _hover={{ color: '#cf8632' }}
+        bg="gray.100"
+        marginTop="12px"
+        type="submit"
+      >
         Login
       </Button>
     </FormControl>

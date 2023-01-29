@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { selectIsFetchCurrentUser } from 'redux/auth/auth-selectors';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
@@ -63,7 +60,6 @@ export default function App() {
           </Routes>
         )}
       </ChakraProvider>
-      <ToastContainer position="top-center" autoClose={3000} />
     </>
   );
 }
