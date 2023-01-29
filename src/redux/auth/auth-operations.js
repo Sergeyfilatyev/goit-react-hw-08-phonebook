@@ -9,12 +9,13 @@ const token = {
     axios.defaults.headers.common.Authorization = '';
   },
 };
+
 export const register = createAsyncThunk(
   'auth/register',
   async (user, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('users/signup', user);
-      console.log(data);
+
       token.set(data.token);
       return data;
     } catch (error) {
@@ -27,7 +28,7 @@ export const login = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('users/login', user);
-      console.log(data);
+
       token.set(data.token);
       return data;
     } catch (error) {
@@ -56,7 +57,7 @@ export const fetchCurrentUser = createAsyncThunk(
     token.set(tokenLS);
     try {
       const { data } = await axios('/users/current');
-      console.log(data);
+
       return data;
     } catch (error) {
       return rejectWithValue(error);

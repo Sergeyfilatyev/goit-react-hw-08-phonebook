@@ -4,9 +4,17 @@ import { Navigation } from 'components/Navigation';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { selectToken } from 'redux/auth/auth-selectors';
-import { Box, Flex, Link, Text } from '@chakra-ui/react';
+import { Box, Flex, Link, Text, Spinner } from '@chakra-ui/react';
+import { Suspense } from 'react';
+import {
+  selectError,
+  selectIsLoading,
+} from 'redux/contacts/contacts-selectors';
+
 export const Layout = () => {
+  const isLoading = useSelector(selectIsLoading);
   const token = useSelector(selectToken);
+  const error = useSelector(selectError);
   return (
     <Box
       bg="radial-gradient(circle, rgba(57,97,48,0.6951155462184874) 3%, rgba(0,36,14,1) 25%, rgba(65,98,78,1) 90%);"
@@ -31,9 +39,16 @@ export const Layout = () => {
         {token ? <AuthUserMenu /> : <AuthNavigation />}
       </Flex>
       <main>
-        <Flex flexDirection="column" alignItems="center" p="10px">
-          <Outlet />
-        </Flex>
+        <Suspense
+          fallback={
+            <Spinner pos="absolute" color="#cf8632" thickness="6px" size="xl" />
+          }
+        >
+          <Flex flexDirection="column" alignItems="center" p="10px">
+            <Outlet />
+            {error && <Text>{error.message}</Text>}
+          </Flex>
+        </Suspense>
       </main>
       <footer>
         <Flex
@@ -56,6 +71,17 @@ export const Layout = () => {
           </Link>
         </Flex>
       </footer>
+      {isLoading && (
+        <Spinner
+          pos="fixed"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          color="#cf8632"
+          thickness="6px"
+          size="xl"
+        />
+      )}
     </Box>
   );
 };
