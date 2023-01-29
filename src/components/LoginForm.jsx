@@ -14,7 +14,6 @@ import {
 import { BiShow, BiHide } from 'react-icons/bi';
 import { FiMail } from 'react-icons/fi';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import { useToast } from '@chakra-ui/react';
 
 export const LoginForm = () => {
   const [show, setShow] = useState(false);
