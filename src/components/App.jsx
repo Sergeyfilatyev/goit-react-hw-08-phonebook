@@ -8,6 +8,7 @@ import { PrivateRoute } from 'HOCs/PrivateRoute';
 import { PublicRoute } from 'HOCs/PublicRoute';
 import { ChakraProvider } from '@chakra-ui/react';
 import { lazy } from 'react';
+
 const HomePage = lazy(() => import('pages/HomePage'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage'));
@@ -15,6 +16,7 @@ const ContactsPage = lazy(() => import('pages/ContactsPage'));
 export default function App() {
   const dispatch = useDispatch();
   const isFetchCurrentUser = useSelector(selectIsFetchCurrentUser);
+
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);

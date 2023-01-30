@@ -7,6 +7,7 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  useToast,
 } from '@chakra-ui/react';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { FiMail } from 'react-icons/fi';
@@ -18,6 +19,7 @@ import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/auth-operations';
 export const RegisterForm = () => {
   const [show, setShow] = useState(false);
+  const toast = useToast();
   const handleClick = () => setShow(!show);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -40,7 +42,23 @@ export const RegisterForm = () => {
   };
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(register({ name, email, password }));
+    dispatch(register({ name, email, password })).then(({ error }) => {
+      if (error) {
+        toast({
+          position: 'top',
+          title: `Registration failed, please try again`,
+          status: 'error',
+          isClosable: true,
+        });
+        return;
+      }
+      toast({
+        position: 'top',
+        title: `Registration completed successfully`,
+        status: 'success',
+        isClosable: true,
+      });
+    });
     setName('');
     setEmail('');
     setPassword('');

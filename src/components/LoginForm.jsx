@@ -10,16 +10,17 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  useToast,
 } from '@chakra-ui/react';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { FiMail } from 'react-icons/fi';
 import { RiLockPasswordFill } from 'react-icons/ri';
-
 export const LoginForm = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const toast = useToast();
 
   const dispatch = useDispatch();
   const handleChange = ({ target: { name, value } }) => {
@@ -36,7 +37,24 @@ export const LoginForm = () => {
   };
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(login({ email, password }));
+    dispatch(login({ email, password })).then(({ error }) => {
+      if (error) {
+        toast({
+          position: 'top',
+          title: `Login failed, please try again`,
+          status: 'error',
+          isClosable: true,
+        });
+        return;
+      }
+      toast({
+        position: 'top',
+        title: `You have successfully logged in`,
+        status: 'success',
+        isClosable: true,
+      });
+    });
+
     setEmail('');
     setPassword('');
   };

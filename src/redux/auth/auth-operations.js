@@ -28,7 +28,6 @@ export const login = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('users/login', user);
-
       token.set(data.token);
       return data;
     } catch (error) {
@@ -52,7 +51,7 @@ export const fetchCurrentUser = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     const tokenLS = getState().auth.token;
     if (!tokenLS) {
-      return rejectWithValue('No token');
+      return rejectWithValue(null);
     }
     token.set(tokenLS);
     try {
