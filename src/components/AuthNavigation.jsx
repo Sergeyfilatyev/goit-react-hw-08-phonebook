@@ -25,7 +25,7 @@ export const AuthNavigation = () => {
           as={NavLink}
           to="register"
         >
-          Sign Up
+          SignUp
         </Link>
       </ListItem>
     </List>

@@ -131,7 +131,7 @@ export const RegisterForm = () => {
         marginTop="12px"
         type="submit"
       >
-        Sign Up
+        SignUp
       </Button>
     </FormControl>
   );
